@@ -1,5 +1,5 @@
 {
-    "name": "FastAPI-DevContainer",
+    "name": "Daytistics",
     "dockerComposeFile": [
         "../docker-compose.dev.yml",
         "docker-compose.yml"
