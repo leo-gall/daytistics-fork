@@ -3,16 +3,32 @@
 # ------------------------------------------------------
 
 type User {
-  id: Int!
-  name: String!
+  id: ID!
+  username: String!
   email: String!
-  age: Int
+  hashedPassword: String!
+  isVerified: Boolean!
+  isLocked: Boolean!
+  isAdmin: Boolean!
+  lastLogin: DateTime
+  createdAt: DateTime!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
-  users: [User!]!
+  health: String!
 }
 
 type Mutation {
-  createUser(name: String!, email: String!, age: Float): User!
+  registerUser(user: RegisterUserInput!): User!
+}
+
+input RegisterUserInput {
+  username: String!
+  email: String!
+  password: String!
 }

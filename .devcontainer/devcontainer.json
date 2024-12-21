@@ -30,7 +30,8 @@
                 "tamasfe.even-better-toml",
                 "pamaron.pytest-runner",
                 "astro-build.astro-vscode",
-                "Nuxtr.nuxt-vscode-extentions"
+                "Nuxtr.nuxt-vscode-extentions",
+                "firsttris.vscode-jest-runner"
             ]
         }
     },

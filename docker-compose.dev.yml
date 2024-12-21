@@ -2,6 +2,7 @@ name: daytistics
 services:
   database:
     image: postgres:16
+    container_name: daytistics_database # Added explicit container name
     environment:
       POSTGRES_DB: daytistics_dev
       POSTGRES_USER: daytistics_user
@@ -9,7 +10,23 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_dev:/var/lib/postgresql/data
+    networks:
+      - daytistics_network # Updated network reference
+
+  test_database:
+    image: postgres:16
+    container_name: daytistics_test_database # Added explicit container name
+    environment:
+      POSTGRES_DB: daytistics_test
+      POSTGRES_USER: daytistics_user
+      POSTGRES_PASSWORD: daytistics_pw
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data
+    networks:
+      - daytistics_network # Updated network reference
 
   backend:
     env_file:
@@ -17,30 +34,22 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
+    container_name: daytistics_backend # Added explicit container name
     ports:
       - 8000:8000
     volumes:
       - ./backend:/app
     environment:
-      DATABASE_URL: postgresql://daytistics_user:daytistics_pw@database:5432/daytistics_dev
+      DATABASE_URL: postgresql://daytistics_user:daytistics_pw@daytistics_database:5432/daytistics_dev
+      TEST_DATABASE_URL: postgresql://daytistics_user:daytistics_pw@daytistics_test_database:5432/daytistics_test
     depends_on:
+      - test_database
       - database
-
-  # backend:
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile.dev
-  #   ports:
-  #     - 8000:8000
-  #     - 5678:5678
-  #   volumes:
-  #     - ./backend:/app
-  #   environment:
-  #     DATABASE_URL: postgresql://daytistics_user:daytistics_pw@database:5432/daytistics_dev
-  #   depends_on:
-  #     - database
+    networks:
+      - daytistics_network # Updated network reference
 
   frontend:
+    container_name: daytistics_frontend # Added explicit container name
     volumes:
       - ./frontend:/app
     build:
@@ -50,8 +59,11 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+    networks:
+      - daytistics_network # Updated network reference
 
   docs:
+    container_name: daytistics_docs # Added explicit container name
     volumes:
       - ./docs:/app
     build:
@@ -59,6 +71,13 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - 4000:4000
+    networks:
+      - daytistics_network # Updated network reference
 
 volumes:
-  postgres_data:
+  postgres_data_dev:
+  postgres_data_test:
+
+networks:
+  daytistics_network:
+    name: daytistics_network
