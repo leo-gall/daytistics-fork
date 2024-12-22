@@ -2,19 +2,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: FastAPI Container Debug",
-            "type": "debugpy",
+            "type": "node",
             "request": "attach",
-            "connect": {
-                "host": "localhost",
-                "port": 5678
-            },
-            "pathMappings": [
-                {
-                    "localRoot": "${workspaceFolder}/app",
-                    "remoteRoot": "/app"
-                }
-            ]
+            "name": "Debug NestJS in Docker",
+            "address": "localhost",
+            "port": 9229,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "sourceMaps": true,
+            "restart": true,
+            "localRoot": "${workspaceFolder}/backend",
+            "remoteRoot": "/app",
+            "outFiles": [
+                "${workspaceFolder}/backend/dist/**/*.js"
+            ],
         }
     ]
 }

@@ -2,11 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type RegisterUserResponse {
   id: ID!
   username: String!
   email: String!
-  hashedPassword: String!
   isVerified: Boolean!
   isLocked: Boolean!
   isAdmin: Boolean!
@@ -24,7 +23,7 @@ type Query {
 }
 
 type Mutation {
-  registerUser(user: RegisterUserInput!): User!
+  registerUser(user: RegisterUserInput!): RegisterUserResponse!
 }
 
 input RegisterUserInput {

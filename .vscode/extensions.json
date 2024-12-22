@@ -1,5 +1,5 @@
 {
-    "recommendations": [
-        "pamaron.pytest-runner"
-    ]
+  "recommendations": [
+    "denoland.vscode-deno"
+  ]
 }

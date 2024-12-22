@@ -1,83 +1,28 @@
-name: daytistics
 services:
-  database:
-    image: postgres:16
-    container_name: daytistics_database # Added explicit container name
-    environment:
-      POSTGRES_DB: daytistics_dev
-      POSTGRES_USER: daytistics_user
-      POSTGRES_PASSWORD: daytistics_pw
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data_dev:/var/lib/postgresql/data
-    networks:
-      - daytistics_network # Updated network reference
-
-  test_database:
-    image: postgres:16
-    container_name: daytistics_test_database # Added explicit container name
-    environment:
-      POSTGRES_DB: daytistics_test
-      POSTGRES_USER: daytistics_user
-      POSTGRES_PASSWORD: daytistics_pw
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_data_test:/var/lib/postgresql/data
-    networks:
-      - daytistics_network # Updated network reference
-
-  backend:
-    env_file:
-      - ./backend/.env.example
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.dev
-    container_name: daytistics_backend # Added explicit container name
-    ports:
-      - 8000:8000
-    volumes:
-      - ./backend:/app
-    environment:
-      DATABASE_URL: postgresql://daytistics_user:daytistics_pw@daytistics_database:5432/daytistics_dev
-      TEST_DATABASE_URL: postgresql://daytistics_user:daytistics_pw@daytistics_test_database:5432/daytistics_test
-    depends_on:
-      - test_database
-      - database
-    networks:
-      - daytistics_network # Updated network reference
-
   frontend:
-    container_name: daytistics_frontend # Added explicit container name
-    volumes:
-      - ./frontend:/app
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
+    environment:
+      - NUXT_PUBLIC_SUPABASE_URL=http://localhost:54321
+      - NUXT_PUBLIC_SUPABASE_ANON_KEY=your-local-anon-key
     depends_on:
-      - backend
-    networks:
-      - daytistics_network # Updated network reference
+      - supabase
 
-  docs:
-    container_name: daytistics_docs # Added explicit container name
-    volumes:
-      - ./docs:/app
+  supabase:
     build:
-      context: ./docs
+      context: ./supabase
       dockerfile: Dockerfile.dev
+    volumes:
+      - ./supabase:/app
+      - /app/node_modules
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 4000:4000
-    networks:
-      - daytistics_network # Updated network reference
-
-volumes:
-  postgres_data_dev:
-  postgres_data_test:
-
-networks:
-  daytistics_network:
-    name: daytistics_network
+      - "54321:54321"
+      - "54323:54323"
+    privileged: true

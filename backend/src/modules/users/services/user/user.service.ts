@@ -1,12 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { hash } from 'bcryptjs';
 import { User } from '../../entities/user.entity';
 import {
   EmailAlreadyInUseException,
   InvalidEmailException,
+  InvalidPasswordException,
+  InvalidUsernameException,
 } from '../../users.exceptions';
-import { isValidEmail } from 'src/common/utils/validation/users/users.validation';
+import {
+  isValidEmail,
+  isValidPassword,
+  isValidUsername,
+} from '../../../../common/utils/validation/users/users.validation';
 
 @Injectable()
 export class UserService {
@@ -28,9 +35,18 @@ export class UserService {
       throw new InvalidEmailException();
     }
 
+    if (!isValidUsername(userData.username)) {
+      throw new InvalidUsernameException();
+    }
+
+    if (!isValidPassword(userData.password)) {
+      throw new InvalidPasswordException();
+    }
+
+    const hashedPassword = await hash(userData.password, 10);
     const toCreate = {
       ...userData,
-      hashedPassword: userData.password,
+      hashedPassword,
     };
 
     if (

@@ -1,0 +1,39 @@
+# supabase/Dockerfile
+FROM node:18
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Install Supabase CLI
+RUN apt-get update && apt-get install -y curl unzip && \
+    curl -fsSL https://github.com/supabase/cli/releases/download/v1.145.4/supabase_1.145.4_linux_amd64.deb -o supabase.deb && \
+    dpkg -i supabase.deb && \
+    rm supabase.deb
+
+# Install Docker (needed for Supabase local development)
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release && \
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    apt-get update && \
+    apt-get install -y docker-ce docker-ce-cli containerd.io
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install
+
+# Copy the rest of the application
+COPY . .
+
+# Start Supabase
+CMD ["pnpm", "supabase", "start"]
