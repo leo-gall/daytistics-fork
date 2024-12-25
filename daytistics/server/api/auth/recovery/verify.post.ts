@@ -4,6 +4,7 @@ import {
     addVerificationAttempt,
     canAttemptVerification,
     getVerificationAttempts,
+    remainingMinutesTillNextAttempt,
     resetVerificationAttempts,
     VerificationType,
 } from '../../../cache/verification';
@@ -23,7 +24,7 @@ export default defineEventHandler(async (event) => {
     if (!canAttemptVerification(email, VerificationType.RECOVERY)) {
         throw createError({
             status: 429,
-            message: 'Token was invalidated due to too many failed attempts',
+            message: `Too many attempts. Please try again in ${remainingMinutesTillNextAttempt(email, VerificationType.RECOVERY)} minutes.`,
         });
     }
 
