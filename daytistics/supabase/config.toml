@@ -247,18 +247,14 @@ enabled = false
 
 [auth.external.google]
 enabled = true
-client_id = "558497355278-uslblm0ouo5aclqfv480p3ptbh0it4pb.apps.googleusercontent.com"
-# DO NOT commit your OAuth provider secret to git. Use environment variable substitution instead:
-secret = "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"
-# Overrides the default auth redirectUrl.
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
 redirect_uri = "http://localhost:54321/auth/v1/callback"
 
 [auth.external.github]
 enabled = true
-client_id = "Ov23liDljPcS3L7c9UkP"
-# DO NOT commit your OAuth provider secret to git. Use environment variable substitution instead:
-secret = "14a60e5de726beb7fdeb4085d2fcc427167af61c"
-# Overrides the default auth redirectUrl.
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GITHUB_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GITHUB_SECRET)"
 redirect_uri = "http://localhost:54321/auth/v1/callback"
 
 
