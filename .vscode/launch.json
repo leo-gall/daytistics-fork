@@ -2,21 +2,37 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "client: chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}/daytistics"
+        },
+        {
             "type": "node",
-            "request": "attach",
-            "name": "Debug NestJS in Docker",
-            "address": "localhost",
-            "port": 9229,
-            "skipFiles": [
-                "<node_internals>/**"
+            "request": "launch",
+            "name": "server: nuxt",
+            "args": [
+                "dev"
             ],
-            "sourceMaps": true,
-            "restart": true,
-            "localRoot": "${workspaceFolder}/backend",
-            "remoteRoot": "/app",
-            "outFiles": [
-                "${workspaceFolder}/backend/dist/**/*.js"
-            ],
+            "osx": {
+                "program": "${workspaceFolder}/daytistics/node_modules/.bin/nuxt"
+            },
+            "linux": {
+                "program": "${workspaceFolder}/daytistics/node_modules/.bin/nuxt"
+            },
+            "windows": {
+                "program": "${workspaceFolder}/daytistics/node_modules/nuxt/bin/nuxt.js"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "fullstack: nuxt",
+            "configurations": [
+                "server: nuxt",
+                "client: chrome"
+            ]
         }
     ]
 }

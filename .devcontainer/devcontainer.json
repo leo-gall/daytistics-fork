@@ -4,8 +4,18 @@
         "../docker-compose.dev.yml",
         "docker-compose.yml"
     ],
-    "service": "backend",
+    "runArgs": [
+        "--network=daytistics_network",
+    ],
+    "service": "frontend",
     "workspaceFolder": "/workspace",
+    "forwardPorts": [
+        3000,
+        54321,
+        54322,
+        54323,
+        54324
+    ],
     "customizations": {
         "vscode": {
             "settings": {
@@ -18,7 +28,7 @@
                 "editor.formatOnSave": true,
                 "editor.formatOnPaste": true,
                 "dev.containers.copyGitConfig": true,
-                "git.path": "/usr/bin/git"
+                "git.path": "/usr/bin/git",
             },
             "extensions": [
                 "ms-python.python",
@@ -33,7 +43,9 @@
                 "Nuxtr.nuxt-vscode-extentions",
                 "firsttris.vscode-jest-runner"
             ]
-        }
+        },
     },
-    "postStartCommand": "apt-get update && apt-get install -y git && git config --global --add safe.directory /workspace"
+    "runArgs": [
+        "--network=host",
+    ],
 }

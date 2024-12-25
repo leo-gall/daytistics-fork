@@ -1,28 +1,27 @@
 services:
   frontend:
     build:
-      context: ./frontend
+      context: ./daytistics
       dockerfile: Dockerfile.dev
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - ./daytistics:/app
     ports:
       - "3000:3000"
-    environment:
-      - NUXT_PUBLIC_SUPABASE_URL=http://localhost:54321
-      - NUXT_PUBLIC_SUPABASE_ANON_KEY=your-local-anon-key
-    depends_on:
-      - supabase
+    networks:
+      - daytistics_network
 
-  supabase:
+  docs:
     build:
-      context: ./supabase
+      context: ./docs
       dockerfile: Dockerfile.dev
     volumes:
-      - ./supabase:/app
-      - /app/node_modules
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docs:/app
     ports:
-      - "54321:54321"
-      - "54323:54323"
-    privileged: true
+      - "5173:5173"
+    networks:
+      - daytistics_network
+
+networks:
+  daytistics_network:
+    driver: bridge
+    external: true

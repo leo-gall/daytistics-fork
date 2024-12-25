@@ -2,67 +2,78 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Start Nuxt",
+      "label": "🚀 Start Supabase",
       "type": "shell",
-      "command": "bun run dev",
+      "command": "pnpm run supabase:start",
       "group": "build",
       "isBackground": true,
       "options": {
-        "cwd": "${workspaceFolder}/frontend"
+        "cwd": "${workspaceFolder}/daytistics"
       },
-      "problemMatcher": [
-        {
-          "owner": "custom",
-          "pattern": [
-            {
-              "regexp": ".",
-              "file": 1,
-              "location": 2,
-              "message": 3
-            }
-          ],
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "starting Nuxt...",
-            "endsPattern": "ready"
-          }
-        }
-      ],
-      "detail": "Starts the Nuxt development server"
+      "detail": "Starts the Supabase development server"
     },
     {
-      "label": "Start Django",
+      "label": "🚀 Start Frontends",
       "type": "shell",
-      "command": "poetry run python -m manage makemigrations && poetry run python -m manage migrate && poetry run python -m manage runserver",
+      "command": "docker compose -f docker-compose.dev.yml up --build",
       "group": "build",
       "isBackground": true,
       "options": {
-        "cwd": "${workspaceFolder}/backend"
+        "cwd": "${workspaceFolder}"
       },
-      "problemMatcher": [
-        {
-          "owner": "custom",
-          "pattern": [
-            {
-              "regexp": ".",
-              "file": 1,
-              "location": 2,
-              "message": 3
-            }
-          ],
-          "background": {
-            "activeOnStart": true,
-            "beginsPattern": "starting Django...",
-            "endsPattern": "Server now running"
-          }
-        }
-      ],
-      "detail": "Starts the Django development server"
+      "detail": "Starts the frontends (Nuxt and the documentation)"
     },
     {
-      "label": "Start All",
-      "dependsOn": ["Start Nuxt", "Start Django"],
-      "detail": "Starts both Nuxt and Django"
+      "label": "⛔ Stop Frontends",
+      "type": "shell",
+      "command": "docker compose -f docker-compose.dev.yml down",
+      "group": "build",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "detail": "Stops the frontends (Nuxt and the documentation)"
+    },
+    {
+      "label": "🚧 Restart Supabase",
+      "type": "shell",
+      "command": "pnpm run supabase:restart",
+      "group": "build",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/daytistics"
+      },
+      "detail": "Restarts the Supabase development server"
+    },
+    {
+      "label": "⛔ Stop Supabase",
+      "type": "shell",
+      "command": "pnpm run supabase:stop",
+      "group": "build",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/daytistics"
+      },
+      "detail": "Resets the Supabase development server"
+    },
+    {
+      "label": "🚮 Reset Supabase",
+      "type": "shell",
+      "command": "pnpm run supabase:reset",
+      "group": "build",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/daytistics"
+      },
+      "detail": "Resets the Supabase development server",
+    },
+    {
+      "label": "💫 Start All",
+      "dependsOn": [
+        "🚀 Start Supabase",
+        "🚀 Start Frontends"
+      ],
+      "detail": "Starts Nuxt, Supabase and the documentation",
     }
   ]
 }
