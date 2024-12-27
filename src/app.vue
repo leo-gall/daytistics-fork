@@ -1,0 +1,12 @@
+<template>
+    <Toaster richColors />
+    <div class="font-nunito">
+        <NuxtLayout>
+            <NuxtPage />
+        </NuxtLayout>
+    </div>
+</template>
+
+<script lang="ts" setup>
+import { Toaster } from 'vue-sonner';
+</script>

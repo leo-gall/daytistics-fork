@@ -1,0 +1,91 @@
+import { Callout, Steps } from 'nextra/components';
+
+# Contributing
+
+Thank you for your interest in contributing to the Daytistics project! We are excited to have you on board. This guide will help you get started with the project and provide you with the necessary information to make your first contribution.
+
+
+
+## Types of Contributions
+
+There are more ways than just contributing code to the project. Here are some examples of how you can contribute to the project:
+
+* **Code Contributions**: You can contribute to the project by writing code. This can be a new feature, a bug fix, or an improvement to the existing codebase.
+* **Documentation Contributions**: You can contribute to the project by writing documentation. This can be a new guide, a tutorial, or an improvement to the existing documentation.
+* **Bug Reports**: You can contribute to the project by reporting bugs. This can be done by creating an issue on GitHub and providing detailed information about the bug.
+* **Feature Requests**: You can contribute to the project by requesting new features. This can be done by creating an issue on GitHub and providing detailed information about the feature you would like to see.
+
+## Process Overview
+
+Here is an overview of the process for contributing to the Daytistics project:
+
+<Steps>
+
+### Open/Choose an Issue
+
+Open an issue on GitHub or choose an existing issue to work on. 
+Please indicate in the issue that you want to work on this issue, 
+make sure it is not already assigned to someone else and that it has the `✅ confirmed` label. 
+After that, you can start working on the issue by setting up your [development environment](./environment-setup.mdx).
+
+### Work on the Issue
+
+Work on the issue by following the instructions in the issue description. 
+A good developer always asks questions if they are unsure about something. Please do not hesitate to ask for help if you need it.
+
+### A bit about Tests
+
+We don't write much tests at the moment, because we are still in the early stages of the project and our focus is to bring the product on the market as soon as possible.
+However, please make sure that...
+
+- You test your changes locally before submitting a pull request.
+- You write tests if you change existing code that is already tested.
+- You use Vitest snapshots to test the frontend components.
+- You add tests for code in the `/src/server/handlers` directory.
+
+However, if you're bored and want to write tests, feel free to do so. We appreciate it!
+
+### Linting and Formatting
+
+Please make sure that your code is formatted using Prettier and that it passes the linting checks.
+
+### Documentation
+
+You have to describe in the pull request what you changed anyway, so you can also reuse this information and put it into the changelog 
+section of the documentation. It's not much work and it helps others to understand what has changed in the project and how it works.
+
+### Submit a Pull Request
+
+When you are ready to submit your changes, open a pull request. The code review process may involve multiple rounds of feedback and revisions. 
+The maintainers may ask you to make changes to the code before the pull request is merged.
+
+### Merge the Pull Request
+
+Once the code changes have been reviewed and approved, the maintainers will merge the pull request. 
+The pull request will be closed, and the changes will be included in the next release.
+
+</Steps>
+
+
+
+## Technologies
+
+<Callout>
+
+It is definitely a benefit if you are familiar with the following technologies, but it is not a requirement. 
+We are happy to help you get started with the project even if you have no prior experience with these technologies.
+
+</Callout>
+
+* **Frontend**: The frontend of the Daytistics project is built with [Nuxt.js](https://nuxtjs.org/) and [Tailwind CSS](https://tailwindcss.com/).
+* **Backend**: We use a lightweight serverless backend with [Supabase](https://supabase.com/) which is integrated with Nuxt using
+[Nitro](https://nitro.build/), a lightweight server toolkit built into Nuxt.
+* **DevOps**: We use GitHub Actions to deploy our frontend to [Vercel](https://vercel.com/), where it runs serverless in the cloud.
+Our backend is managed by Supabase, which also provides a serverless environment.
+
+
+## Ask, Help and Discuss
+
+We encourage you to comment on existing issues and pull requests to share your thoughts and provide feedback.
+Feel free to ask questions in the issue tracker or reach out to the project maintainers if you need assistance.
+Before submitting a large contribution, consider opening an issue, discussion or talk with us on our discord to discuss your approach.

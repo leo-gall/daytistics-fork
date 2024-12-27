@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AuthSignUpForm > matches snapshot 1`] = `
+"<form class="space-y-3"><input id="name" placeholder="User Name" type="text" required="" class="input"><input id="email" placeholder="Email Address" type="email" required="" class="input"><input id="password" placeholder="Password" type="password" required="" class="input">
+  <!--v-if-->
+  <div><button type="submit" class="w-full flex justify-center button">Sign Up</button></div>
+</form>"
+`;

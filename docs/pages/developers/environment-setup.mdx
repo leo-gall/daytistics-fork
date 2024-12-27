@@ -1,0 +1,40 @@
+---
+title: Environment Setup
+---
+
+import { Steps, Callout } from "nextra/components";
+import { Link } from "nextra-theme-docs";
+
+# Environment Setup
+
+<Callout type="info">
+  The following steps are designed to be performed on a Unix-based system. 
+  We do not provide support for Windows at this time and won't do so in the future.
+  If you want to use Windows, we recommend using the <Link href="https://learn.microsoft.com/en-us/windows/wsl/install">Windows Subsystem for Linux</Link>.
+</Callout>
+
+<Steps>
+### Clone the Repository
+ 
+```sh copy
+git clone git@github.com:daytistics/daytistics.git
+```
+
+### Dependencies
+
+Before you can install the dependencies, you have to change into the `app` directory.
+
+```sh copy
+cd ./daytistics/src
+```
+
+Now you can install the dependencies using `pnpm`.
+
+```sh copy
+pnpm install
+```
+
+### Supabase 
+
+
+</Steps>

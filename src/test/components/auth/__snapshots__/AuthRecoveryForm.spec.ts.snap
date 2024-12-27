@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AuthRecoveryForm > matches snapshot (recovery stage 1) 1`] = `
+"<form class="space-y-3"><input id="email" placeholder="Email address" type="email" required="" class="input">
+  <div as="div" class="my-3"></div><button type="submit" class="w-full flex justify-center button"> Send Reset Email </button>
+</form>"
+`;
+
+exports[`AuthRecoveryForm > matches snapshot (recovery stage 2) 1`] = `
+"<form class="space-y-6" data-test-stage="2">
+  <div class="space-y-3">
+    <p class="text-daytistics-gray-dark"> Please enter your new password below and make sure to remember it. </p><input type="password" name="password" id="password" class="input" placeholder="New Password"><input type="password" name="repeat-password" id="repeat-password" class="input" placeholder="Repeat Password">
+  </div>
+  <hr>
+  <div class="space-y-3">
+    <p class="text-daytistics-gray-dark text-center"> If the email address is correct, you should have received an email with a 6-digit code. Please enter it below. </p>
+    <authotp modelvalue=""></authotp>
+    <div as="div" class="my-3"></div>
+    <p class="text-xs leading-5 text-gray-500 text-center mt-2 mb-5"> No code? Check your spam folder or <button type="button" class="font-medium text-day-primary hover:text-day-secondary"> Resend </button></p>
+  </div><button type="submit" class="w-full flex justify-center button"> Reset Password </button>
+</form>"
+`;

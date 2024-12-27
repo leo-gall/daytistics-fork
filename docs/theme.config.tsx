@@ -1,9 +1,9 @@
 import React from "react";
-import { type DocsThemeConfig, Link } from "nextra-theme-docs";
+import { type DocsThemeConfig, Link, useConfig } from "nextra-theme-docs";
 
 const logo = (
   <div className="flex items-center space-x-2">
-    <img src="/logo.png" width={40} />
+    <img src="/images/logo.png" width={40} />
     <div className="flex flex-row gap-1">
       <span className=" text-base font-bold">Daytistics</span>
       <span className="text-base font-ibmmono text-emerald-500 uppercase">
@@ -33,6 +33,21 @@ const config: DocsThemeConfig = {
       dark: 42,
       light: 42,
     },
+  },
+  head() {
+    const { frontMatter } = useConfig();
+    const hasTitle = frontMatter.title !== undefined;
+    const title = hasTitle
+      ? `${frontMatter.title} • Daytistics Docs`
+      : "Daytistics Docs";
+
+    return (
+      <>
+        <link rel="icon" href="/images/logo.png" />
+        <meta property="og:title" content={frontMatter.title || "Nextra"} />
+        <title>{title}</title>
+      </>
+    );
   },
   logo: logo,
 

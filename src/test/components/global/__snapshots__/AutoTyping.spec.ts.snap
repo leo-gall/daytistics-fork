@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AutoTyping > matches snapshot 1`] = `"<p data-v-1e8caeda="">A</p>"`;
+
+exports[`AutoTyping > matches snapshot 2`] = `"<p data-v-1e8caeda="">Aut</p>"`;
+
+exports[`AutoTyping > matches snapshot 3`] = `"<p data-v-1e8caeda="">AutoT</p>"`;
+
+exports[`AutoTyping > matches snapshot 4`] = `"<p data-v-1e8caeda="">AutoTypi</p>"`;
+
+exports[`AutoTyping > matches snapshot 5`] = `"<p data-v-1e8caeda="">AutoTyping</p>"`;

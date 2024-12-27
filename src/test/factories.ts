@@ -1,0 +1,52 @@
+import type User from '~/shared/types/user';
+import { faker } from '@faker-js/faker';
+
+export const UserFactory = (overrides: Partial<User> = {}): User => {
+    return {
+        instance_id: faker.string.uuid(),
+        id: faker.string.uuid(),
+        aud: 'authenticated',
+        role: 'authenticated',
+        email: faker.internet.email(),
+        encrypted_password: faker.internet.password(),
+        email_confirmed_at: faker.date.recent().toISOString(),
+        invited_at: faker.date.past().toISOString(),
+        confirmation_token: faker.string.alphanumeric(32),
+        confirmation_sent_at: faker.date.recent().toISOString(),
+        recovery_token: faker.string.alphanumeric(32),
+        recovery_sent_at: faker.date.recent().toISOString(),
+        email_change_token_new: faker.string.alphanumeric(32),
+        email_change: faker.internet.email(),
+        email_change_sent_at: faker.date.recent().toISOString(),
+        last_sign_in_at: faker.date.recent().toISOString(),
+        raw_app_meta_data: {
+            provider: 'email',
+            providers: ['email'],
+        },
+        raw_user_meta_data: {
+            sub: faker.string.uuid(),
+            email: faker.internet.email(),
+            display_name: faker.internet.userName(),
+            email_verified: faker.datatype.boolean(),
+            phone_verified: faker.datatype.boolean(),
+        },
+        is_super_admin: faker.datatype.boolean(),
+        created_at: faker.date.past().toISOString(),
+        updated_at: faker.date.recent().toISOString(),
+        phone: faker.phone.number({ style: 'national' }),
+        phone_confirmed_at: faker.date.recent().toISOString(),
+        phone_change: faker.phone.number({ style: 'national' }),
+        phone_change_token: faker.string.alphanumeric(32),
+        phone_change_sent_at: faker.date.recent().toISOString(),
+        confirmed_at: faker.date.recent().toISOString(),
+        email_change_token_current: faker.string.alphanumeric(32),
+        email_change_confirm_status: faker.datatype.boolean() ? 1 : 0,
+        banned_until: faker.date.future().toISOString(),
+        reauthentication_token: faker.string.alphanumeric(32),
+        reauthentication_sent_at: faker.date.recent().toISOString(),
+        is_sso_user: faker.datatype.boolean(),
+        deleted_at: faker.date.future().toISOString(),
+        is_anonymous: faker.datatype.boolean(),
+        ...overrides,
+    };
+};
