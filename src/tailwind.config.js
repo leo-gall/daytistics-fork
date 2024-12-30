@@ -29,7 +29,7 @@ export default {
                         2: '#3b82f6',
                     },
                     gray: {
-                        light: '#c0c0c0',
+                        light: '#e5e7eb',
                         medium: '#616161',
                         dark: '#313233',
                     },
